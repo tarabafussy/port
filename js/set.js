@@ -1,7 +1,15 @@
 document.getElementById('set').onclick = function() {
-	chrome.storage.sync.get("task", function(task){
-		var newtask = document.getElementById('tasktext').value;
-		var newtasks = task.task.concat(newtask);
-		chrome.storage.sync.set({task:newtasks});
+	var newtask = {
+		prioritytask: [],
+		taskst:[]
+	};
+	var tasklist = new Array();
+
+	chrome.storage.sync.get("task", function(tasks){
+		newtask["prioritytask"] = document.getElementById('tasktext').value;
+		newtask["taskst"] = "nocomp";
+		tasklist.push(tasks.task);
+		tasklist.push(newtask);
+		chrome.storage.sync.set({task:tasklist});
 	});
 }
