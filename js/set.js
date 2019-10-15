@@ -8,7 +8,7 @@ document.getElementById('set').onclick = function() {
 	chrome.storage.sync.get("task", function(tasks){
 		newtask["prioritytask"] = document.getElementById('tasktext').value;
 		newtask["taskst"] = "nocomp";
-		tasklist.push(tasks.task);
+		tasklist = tasks.task;
 		tasklist.push(newtask);
 		chrome.storage.sync.set({task:tasklist});
 	});

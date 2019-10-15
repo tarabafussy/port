@@ -1,5 +1,9 @@
 document.body.onload = function() {
 	chrome.storage.sync.get("task", function(tasks) {
-		document.getElementById('tasklist').innerHTML = tasks.task;
+		var tasklist = new Array();
+		tasklist.push(tasks.task);
+		for (var taskname in tasklist) {
+			document.getElementById('tasklist').innerHTML += taskname;
+		}
 	});
 }
