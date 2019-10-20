@@ -1,15 +1,10 @@
 document.getElementById('set').onclick = function() {
-	var newtask = {
-		prioritytask: [],
-		taskst:[]
-	};
-	var tasklist = new Array();
-
+	var tasklist = {};
 	chrome.storage.sync.get("task", function(tasks){
-		newtask["prioritytask"] = document.getElementById('tasktext').value;
-		newtask["taskst"] = "nocomp";
-		tasklist = tasks.task;
-		tasklist.push(newtask);
+		if(tasks.task != null ){
+			tasklist = tasks.task;
+		}
+		tasklist[document.getElementById('tasktext').value] = "nocomp";
 		chrome.storage.sync.set({task:tasklist});
 	});
 }

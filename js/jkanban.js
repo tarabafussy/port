@@ -367,6 +367,7 @@ var dragula = require("dragula");
     };
 
     this.removeElement = function(el) {
+      console.log(el.id);
       if (typeof el === "string")
         el = self.element.querySelector('[data-eid="' + el + '"]');
       if (el !== null) {
