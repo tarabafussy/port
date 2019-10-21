@@ -2,6 +2,7 @@
 	"name": "RoutinTask",
 	"version": "0.1.0",
 	"manifest_version": 2,
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 	"description": "ルーチンワークを設定できるタスク管理アプリです",
 	"icons": {
 		"16": "images/icon16.png",
@@ -14,7 +15,7 @@
 			"32": "images/icon32.png"
 		},
 		"default_title": "ルーチンタスク",
-	"default_popup": "main.html"
+		"default_popup": "test.html"
 	},
 	"permissions": [
 	"alarms",

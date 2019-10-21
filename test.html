@@ -1,35 +1,50 @@
-<section class="section" id="board">
-  <div class="container">
-    <div class="columns">
-      <div class="column status-1">
-        <div class="tags has-addons">
-          <span class="tag">未対応</span>
-          <span class="tag is-dark">{{ tasks.length }}</span>
-        </div>
-        <div class="card" v-for="task in tasks" v-bind:key="task.name">
-          <div class="card-content">{{ task.name }}</div>
-          <div class="card-footer">
-            <div class="card-footer-item">{{ task.assignee }}</div>
-            <div class="card-footer-item">{{ task.mandays }} 人日</div>
-          </div>
-          <div class="card-footer">
-            <a class="card-footer-item">◀︎</a>
-            <a class="card-footer-item">▶︎</a>
-          </div>
-        </div>
-      </div>
-      <div class="column status-2">
-        <div class="tags has-addons">
-          <span class="tag">処理中</span>
-          <span class="tag is-dark"></span>
-        </div>
-      </div>
-      <div class="column status-3">
-        <div class="tags has-addons">
-          <span class="tag">完了</span>
-          <span class="tag is-dark"></span>
-        </div>
-      </div>
-    </div>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>routintask</title>
+  <link rel="stylesheet" href="all.css">
+</head>
+<body>
+  <div id="app">
+    <label v-for="label in options">
+      <input type="radio"
+      v-model="current"
+      v-bind:value="label.value">{{label.label}}
+    </label>
+    <table>
+      <thead v-pre>
+        <tr>
+          <th class="id">ID</th>
+          <th class="comment">コメント</th>
+          <th class="state">状態</th>
+          <th class="button">-</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in computedTodos" v-bind:key="item.id" v-bind:class="{done:item.state}">
+          <th>{{item.id}}</th>
+          <td>{{item.comment}}</td>
+          <td class="state">
+            <button v-on:click="doChangeState(item)">
+              {{labels[item.state]}}
+            </button>
+          </td>
+          <td class="button">
+            <button v-on:click.ctrl="doRemove(item)">
+              削除
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h2>タスクの追加</h2>
+    <form class="add-form" v-on:submit.prevent="doAdd">
+      内容<input type="text" ref="comment">
+      <button type="submit">追加</button>
+    </form>
   </div>
-</section>
+  <script src="js/vue.min.js"></script>
+  <script src="js/vuetest.js"></script>
+</body>
+</html>
