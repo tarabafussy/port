@@ -1,0 +1,19 @@
+body{
+	width:350px;
+}
+table{
+	margin-left: auto;
+}
+.task{
+	background-color: aliceblue;
+}
+.tasktext{
+	width: 68%;
+}
+.addtask{
+	background-color: aliceblue;
+}
+.state{
+}
+.button{
+}

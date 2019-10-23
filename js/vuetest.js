@@ -1,6 +1,9 @@
 var STORAGE_KEY = 'todos-vuejs-demo'
 var todoStorage = {
   fetch: function() {
+  	chrome.storage.sync.get("tasklist", function(items){
+		localStorage.setItem(STORAGE_KEY, JSON.stringify(items.tasklist))
+	});
     var todos = JSON.parse(
       localStorage.getItem(STORAGE_KEY) || '[]'
     )
@@ -12,6 +15,7 @@ var todoStorage = {
   },
   save: function(todos) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+    chrome.storage.sync.set({tasklist:todos});
   }
 }
 
@@ -22,7 +26,7 @@ var app = new Vue({
 		current:-1,
 		options:[
 		{value:-1,label:"すべて"},
-		{value:0,label:"作業中"},
+		{value:0,label:"途中"},
 		{value:1,label:"完了"}
 		]
 	},
