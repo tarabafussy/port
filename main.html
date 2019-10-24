@@ -1,17 +1,52 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="jkanban.min.css">
+  <meta charset="utf-8">
+  <title>routintask</title>
+  <link rel="stylesheet" href="all.css">
 </head>
 <body>
-	<script src="js/jquery-3.4.1.min.js"></script>
-	<div id="tasklist"></div>
-	<script src="js/get.js"></script>
-	<a href="new.html">タスク追加</a>
-	<div id="testlist"></div>
-	<script src="js/jkanban.min.js"></script>
-	<script src="js/kanbantest.js"></script>
-	<script src="js/test.js"></script>
+  <div id="app">
+    <label v-for="label in options">
+      <input type="radio"
+      v-model="current"
+      v-bind:value="label.value">{{label.label}}
+    </label>
+    <table>
+      <thead v-pre>
+        <tr>
+          <th class="id">ID</th>
+          <th class="comment">タスク</th>
+          <th class="state">状態</th>
+          <th class="button">-</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="task" v-for="item in computedTodos" v-bind:key="item.id" v-bind:class="{done:item.state}">
+          <th>{{item.id}}</th>
+          <td class="tasktext"><h3>{{item.comment}}</h3></td>
+          <td class="state">
+            <button v-on:click="doChangeState(item)">
+              {{labels[item.state]}}
+            </button>
+          </td>
+          <td class="button">
+            <button v-on:click.ctrl="doRemove(item)">
+              削除
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="addtask">
+    <h2>タスクの追加</h2>
+      <form class="add-form" v-on:submit.prevent="doAdd">
+        内容<input type="text" ref="comment">
+        <button type="submit">追加</button>
+      </form>
+    </div>
+  </div>
+  <script src="js/vue.min.js"></script>
+  <script src="js/vuetest.js"></script>
 </body>
 </html>

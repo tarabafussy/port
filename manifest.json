@@ -15,7 +15,7 @@
 			"32": "images/icon32.png"
 		},
 		"default_title": "ルーチンタスク",
-		"default_popup": "test.html"
+		"default_popup": "main.html"
 	},
 	"permissions": [
 	"alarms",
