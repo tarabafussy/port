@@ -101,6 +101,7 @@ var app = new Vue({
     	chrome.storage.sync.set({month:JSON.stringify(month)});
     	chrome.storage.sync.set({day:JSON.stringify(day)});
     	chrome.storage.sync.set({hour:JSON.stringify(hour)});
+    	chrome.storage.sync.set({test:JSON.stringify(year)});
 	},
 	methods: {
 		doAdd:function(event, value){
