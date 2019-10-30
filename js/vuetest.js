@@ -52,56 +52,81 @@ var app = new Vue({
 	},
 	created(){
 		this.todos = todoStorage.fetch()
-		chrome.storage.sync.get("year", function(year){
-			chrome.storage.sync.get("month", function(month){
-				chrome.storage.sync.get("day", function(day){
-					chrome.storage.sync.get("hour", function(hour){
-						if (year.year != undefined){
-							var endyear = parseInt(year.year, 10);
-							var endmonth = parseInt(month.month, 10);
-							var endday = parseInt(day.day, 10);
-							var endhour = parseInt(hour.hour, 10);
-							var nowdate = new Date();
-		    				var nowyear = nowdate.getFullYear();
-		   					var nowmonth = nowdate.getMonth();
-		    				var nowday = nowdate.getDate();
-		    				var nowhour = nowdate.getHours();
-		    				if(nowmonth >= endmonth){
-		    					if(nowday >= endday){
-		    						if(nowhour >= 7){
-		    							if(endhour < 7){
-		    								this.todos.forEach((object, index) => {
-												this.$set(this.todos[index], 'state', 0)
-											})
-		    							}
-		    						}
-		    					}
-		    					else if(nowmonth > endmonth){
-		    						this.todos.forEach((object, index) => {
-										this.$set(this.todos[index], 'state', 0)
-									})
-		    					}
+			if (localStorage.year != undefined){
+				var endyear = parseInt(localStorage.year, 10);
+				var endmonth = parseInt(localStorage.month, 10);
+				var endday = parseInt(localStorage.day, 10);
+				var endhour = parseInt(localStorage.hour, 10);
+				var nowdate = new Date();
+		    	var nowyear = nowdate.getFullYear();
+		   		var nowmonth = nowdate.getMonth();
+		    	var nowday = nowdate.getDate();
+		    	var nowhour = nowdate.getHours();
+		    	if(nowmonth >= endmonth){
+		    		if(nowday >= endday){
+		    			if(nowhour >= 7){
+		    				if(endhour < 7){
+								var enddate = new Date();
+								var year = enddate.getFullYear();
+								var month = enddate.getMonth();
+								var day = enddate.getDate();
+								var hour = enddate.getHours();
+								localStorage.year = year;
+								localStorage.month = month;
+								localStorage.day = day;
+								localStorage.hour = hour;
 		    				}
-		    				else if(nowyear > endyear){
+		    				else if(nowday > endday){
 		    					this.todos.forEach((object, index) => {
 									this.$set(this.todos[index], 'state', 0)
 								})
+								var enddate = new Date();
+								var year = enddate.getFullYear();
+								var month = enddate.getMonth();
+								var day = enddate.getDate();
+								var hour = enddate.getHours();
+								localStorage.year = year;
+								localStorage.month = month;
+								localStorage.day = day;
+								localStorage.hour = hour;
 		    				}
-	    				}
-	    			});
-    			});
-			});
-		});
-		var enddate = new Date();
-    	var year = enddate.getFullYear();
-    	var month = enddate.getMonth();
-    	var day = enddate.getDate();
-    	var hour = enddate.getHours();
-    	chrome.storage.sync.set({year:JSON.stringify(year)});
-    	chrome.storage.sync.set({month:JSON.stringify(month)});
-    	chrome.storage.sync.set({day:JSON.stringify(day)});
-    	chrome.storage.sync.set({hour:JSON.stringify(hour)});
-    	chrome.storage.sync.set({test:JSON.stringify(year)});
+		    			}
+		    		}
+		    		else if(nowmonth > endmonth){
+						var enddate = new Date();
+						var year = enddate.getFullYear();
+						var month = enddate.getMonth();
+						var day = enddate.getDate();
+						var hour = enddate.getHours();
+						localStorage.year = year;
+						localStorage.month = month;
+						localStorage.day = day;
+						localStorage.hour = hour;
+		    		}
+		    	}
+		    	else if(nowyear > endyear){
+					var enddate = new Date();
+					var year = enddate.getFullYear();
+					var month = enddate.getMonth();
+					var day = enddate.getDate();
+					var hour = enddate.getHours();
+					localStorage.year = year;
+					localStorage.month = month;
+					localStorage.day = day;
+					localStorage.hour = hour;
+		    	}
+	    	}
+	    	else {
+	    		var enddate = new Date();
+				var year = enddate.getFullYear();
+				var month = enddate.getMonth();
+				var day = enddate.getDate();
+				var hour = enddate.getHours();
+				localStorage.year = year;
+				localStorage.month = month;
+				localStorage.day = day;
+				localStorage.hour = hour;
+	    	}
 	},
 	methods: {
 		doAdd:function(event, value){
