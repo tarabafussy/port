@@ -66,6 +66,9 @@ var app = new Vue({
 		    		if(nowday >= endday){
 		    			if(nowhour >= 7){
 		    				if(endhour < 7){
+		    					this.todos.forEach((object, index) => {
+									this.$set(this.todos[index], 'state', 0)
+								})
 								var enddate = new Date();
 								var year = enddate.getFullYear();
 								var month = enddate.getMonth();
@@ -93,6 +96,9 @@ var app = new Vue({
 		    			}
 		    		}
 		    		else if(nowmonth > endmonth){
+		    			this.todos.forEach((object, index) => {
+							this.$set(this.todos[index], 'state', 0)
+						})
 						var enddate = new Date();
 						var year = enddate.getFullYear();
 						var month = enddate.getMonth();
@@ -105,6 +111,9 @@ var app = new Vue({
 		    		}
 		    	}
 		    	else if(nowyear > endyear){
+		    		this.todos.forEach((object, index) => {
+						this.$set(this.todos[index], 'state', 0)
+					})
 					var enddate = new Date();
 					var year = enddate.getFullYear();
 					var month = enddate.getMonth();
